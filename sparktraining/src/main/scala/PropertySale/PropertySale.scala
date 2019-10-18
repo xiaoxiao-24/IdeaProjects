@@ -42,7 +42,7 @@ object PropertySale {
 
     println("Column summary: SALEDATE  ")
     val colDescription2 = PropertySale.describe("SALEDATE")
-    colDescription2.show() 
+    colDescription2.show()
 
     /*System.out.println("=== Number of properties sold by city ===")
     PropertySale.groupBy("PROPERTYCITY").count().orderBy(desc("count")).show()
