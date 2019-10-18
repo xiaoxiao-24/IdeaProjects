@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Oct 14 10:35:04 CEST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-016d-c968-1410-00000cfef4f0 
+on database directory /Users/xiaoxiaorey/IdeaProjects/scalahelloworld/src/main/scala/scala_first_step_03/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@797fb51 
+Loaded from file:/usr/local/Cellar/apache-spark/2.4.4/libexec/jars/derby-10.12.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_221-b11
+user.dir=/Users/xiaoxiaorey/IdeaProjects/scalahelloworld/src/main/scala/scala_first_step_03
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.14.6
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
