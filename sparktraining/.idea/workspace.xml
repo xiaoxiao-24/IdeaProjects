@@ -19,7 +19,9 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -34,10 +36,11 @@
   <component name="ProjectId" id="1SCNcrumrpZBa1L1JXUyRed6wRs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="/usr/bin/git" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -51,7 +54,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.FileToHive">
+  <component name="RunManager" selected="Application.CatalogAPI_Hive">
+    <configuration name="CatalogAPI_Hive" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="PropertySale.CatalogAPI_Hive" />
+      <module name="sparktraining" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="PropertySale.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DFvsDS_Perf" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="PropertySale.DFvsDS_Perf" />
       <module name="sparktraining" />
@@ -91,19 +107,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PropertySale_DS" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="PropertySale.PropertySale_DS" />
-      <module name="sparktraining" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="PropertySale.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PropertySale_DS_testCaseClass" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="PropertySale.PropertySale_DS_CaseClass" />
       <module name="sparktraining" />
@@ -119,11 +122,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CatalogAPI_Hive" />
         <item itemvalue="Application.FileToHive" />
         <item itemvalue="Application.DFvsDS_Perf" />
         <item itemvalue="Application.PropertySale" />
         <item itemvalue="Application.PropertySale_DS_testCaseClass" />
-        <item itemvalue="Application.PropertySale_DS" />
       </list>
     </recent_temporary>
   </component>

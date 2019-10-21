@@ -1,5 +1,9 @@
 package PropertySale
 
+/*
+ *   SparkSQL with remote Hive
+ */
+
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SparkSession
@@ -47,8 +51,9 @@ object FileToHive extends App{
 
   val PropertySaleDF = spark.read.schema(customSchema).option("header", "true").option("delimiter", ",").csv(path)
 
-  PropertySaleDF.write.saveAsTable("PropertySale")
+  PropertySaleDF.write.saveAsTable("propertysale.PropertySale")
   // ça ne marche pas, parce que ce spark est local, et le hive est en gcloud. Ils sont pas dans le même reseaux et cluster
+  // ou local spark n'a pas le droit à ecrire sur hdfs remote
 
   spark.stop()
   sc.stop()
