@@ -4,14 +4,7 @@ package PropertySale
  *   SparkSQL with remote Hive
  */
 
-import org.apache.log4j.{Level, Logger}
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
-import org.apache.spark.{SparkConf, SparkContext}
-
-import scala.reflect.io.File
-
-object CatalogAPI_Hive extends App {
+/*object CatalogAPI_Hive extends App {
 
   Logger.getLogger("org").setLevel(Level.ERROR)
 
@@ -43,4 +36,4 @@ object CatalogAPI_Hive extends App {
   spark.stop()
   sc.stop()
 
-}
+}*/

@@ -44,8 +44,8 @@ object PropertySale {
     val colDescription2 = PropertySale.describe("SALEDATE")
     colDescription2.show()
 
-    /*System.out.println("=== Number of properties sold by city ===")
-    PropertySale.groupBy("PROPERTYCITY").count().orderBy(desc("count")).show()
+    System.out.println("=== Number of properties sold by city ===")
+    //PropertySale.groupBy("PROPERTYCITY").count().orderBy(desc("count")).show()
 
     System.out.println("=== [Multi Filtering] Valid Sale ===")
     //PropertySale.filter("SaleCode == '0' or SaleCode == 'U' or SaleCode == 'UR'").select("PROPERTYCITY","SCHOOLDESC","SALEDESC","SALECODE","PRICE").show()
@@ -61,7 +61,7 @@ object PropertySale {
     )
     System.out.println("=== schema of typed data frame ===")
     PropertySale_typed.printSchema()
-*/
+
 
     spark.stop()
     sc.stop()
