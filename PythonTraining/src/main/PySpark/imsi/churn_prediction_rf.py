@@ -1,3 +1,7 @@
+###################
+#  Random Forest  #
+###################
+
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
@@ -22,6 +26,9 @@ spark = SparkSession.builder. \
 
 sc.setLogLevel("ERROR")
 
+##################################
+#      read from JSON file       #
+##################################
 path = "/Users/xiaoxiaorey/IdeaProjects/sparktraining/data_source/imsi_json.json"
 imsiDF = spark.read.json(path)
 
@@ -45,7 +52,12 @@ imsi_train = spark.sql("select arpu,averagemonthlybill, totalspent, bool2int(sma
                        "and type <> '' "
                        "and handsettype <> '' ")
 
-# First we have to use the StringIndexer to convert the strings to integers.
+
+##################################
+#  Conversion of string columns  #
+##################################
+
+# First we have to use the StringIndexer to convert the string-columns to integer-column.
 indexer1 = StringIndexer().setInputCol("handsettype").setOutputCol("handsettypeIndex").setHandleInvalid("keep")
 DF_Churn1 = indexer1.fit(imsi_train).transform(imsi_train)
 
@@ -55,15 +67,22 @@ DF_Churn2 = indexer2.fit(DF_Churn1).transform(DF_Churn1)
 indexer3 = StringIndexer().setInputCol("type").setOutputCol("typeIndex").setHandleInvalid("keep")
 DF_Churn3 = indexer3.fit(DF_Churn2).transform(DF_Churn2)
 
-# encode the indexed columns
+
+###########################################
+#  encode the Indexed-columns to vectors  #
+###########################################
 # use the OneHotEncoderEstimator to do the encoding.
 encoder = OneHotEncoderEstimator(). \
     setInputCols(["handsettypeIndex", "categoryIndex", "typeIndex"]). \
     setOutputCols(["handsettypeVec", "categoryVec", "typeVec"])
 DF_Churn_encoded = encoder.fit(DF_Churn3).transform(DF_Churn3)
 
+
+########################################
+#  Prepare the training-ready dataset  #
+########################################
 # Spark models need exactly two columns: “label” and “features”
-# create "label" column
+# 1) create "label" column
 get_label = DF_Churn_encoded.select(col("bool2int(canceled)").cast("int").alias("label"),
                                     DF_Churn_encoded.arpu, DF_Churn_encoded.averagemonthlybill,
                                     DF_Churn_encoded.totalspent, col("bool2int(smartphone)").cast("int"),
@@ -74,7 +93,7 @@ get_label = DF_Churn_encoded.select(col("bool2int(canceled)").cast("int").alias(
 # methodes 2: change column name
 # get_label = DF_Churn_encoded.withColumnRenamed("bool2int(canceled)", "label")
 
-# assembler the features columns
+# 2) assembler the "features" columns
 assembler = VectorAssembler().setInputCols(["arpu", "averagemonthlybill", "totalspent", "bool2int(smartphone)",
                                             "daysactive", "dayslastactive", "handsettypeVec", "categoryVec",
                                             "typeVec"]).setOutputCol("features")
@@ -82,11 +101,19 @@ assembler = VectorAssembler().setInputCols(["arpu", "averagemonthlybill", "total
 # Transform the DataFrame
 output = assembler.transform(get_label).select("label", "features")
 
+
+############################################################
+#  seperate train dataset into 2 parts: training and test  #
+############################################################
 # prepare dataset ( one part for train 70%, one for test 30%)
 # Split data into training (70%) and test (30%)
 [training, test] = output.select("label", "features").randomSplit([0.7, 0.3], 12345)
 training.cache()
 
+
+#####################
+#  train the model  #
+#####################
 # create the training model
 rf = RandomForestClassifier()
 
@@ -103,6 +130,11 @@ cv = CrossValidator().setEstimator(rf).setEvaluator(MulticlassClassificationEval
 # train the model
 # You can then treat this object as the model and use fit on it.
 model = cv.fit(training)
+
+
+##############################################
+#  interpretation of the result of training  #
+##############################################
 
 # get the results of training, test with the test dataset
 results = model.transform(test).select("features", "label", "prediction")
@@ -207,7 +239,7 @@ cnf_matrix = confusion_matrix(y_true, y_pred, labels=labels)
 print(cnf_matrix)
 
 # Plot non-normalized confusion matrix
-fig = plt.figure()
+fig = plt.figure(figsize=(14, 7))
 ax = fig.add_subplot(121)
 ax.set_aspect('equal')
 plot_confusion_matrix(cnf_matrix, classes=labels,
