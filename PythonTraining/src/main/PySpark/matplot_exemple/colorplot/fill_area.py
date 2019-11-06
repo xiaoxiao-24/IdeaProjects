@@ -18,7 +18,7 @@ plt.fill_between(x, y, color='#539ecd')
 
 plt.grid()
 
-plt.title('How to fill an area in matplotlib ?', fontsize=10)
+plt.title('How to fill an area between a curve and the x axis?', fontsize=10)
 
 # plt.savefig('how_to_fill_area_matplotlib_01.png', bbox_inches='tight')
 plt.show()
@@ -33,7 +33,7 @@ plt.fill_between(x, y, np.max(y), color='#539ecd')
 
 plt.grid()
 
-plt.title('How to fill an area in matplotlib ?', fontsize=10)
+plt.title('How to fill the opposite area between a curve and the x axis?', fontsize=10)
 
 # plt.savefig('how_to_fill_area_matplotlib_02.png', bbox_inches='tight')
 plt.show()
@@ -69,7 +69,7 @@ plt.grid()
 plt.xlim(0, 10)
 plt.ylim(-1, 2.5)
 
-plt.title('How to fill an area in matplotlib ?', fontsize=10)
+plt.title('How to fill an area between two curves?', fontsize=10)
 
 # plt.savefig('how_to_fill_area_matplotlib_03.png', bbox_inches='tight')
 plt.show()
@@ -105,7 +105,7 @@ plt.grid()
 
 plt.xlim(0, 10)
 plt.ylim(-1, 2.5)
-plt.title('How to fill an area in matplotlib ?', fontsize=10)
+plt.title('How to fill an area two curves using a condition?', fontsize=10)
 
 # plt.savefig('how_to_fill_area_matplotlib_04.png', bbox_inches='tight')
 plt.show()
@@ -129,8 +129,24 @@ plt.fill_between(x, y, color='#539ecd')
 
 plt.grid()
 
-plt.title('How to fill an area in matplotlib ?', fontsize=10)
+plt.title('How to fill an area two lines using a condition?', fontsize=10)
 
 # plt.savefig('how_to_fill_area_matplotlib_05.png', bbox_inches='tight')
 plt.show()
 # plt.close()
+
+
+#############################################
+# Fill between two curves using a condition 3
+#############################################
+x = np.linspace(0, 3, 300)
+y1 = np.sin(x)
+y2 = x / 3
+
+plt.plot(x, y1, '-.', x, y2, '--')
+plt.fill_between(x, y1, y2, where=y1 >= y2, facecolor='gold')
+plt.fill_between(x, y1, y2, where=y2 >= y1, facecolor='tan')
+
+plt.title('How to fill an area two curves using a condition?', fontsize=10)
+
+plt.show()
