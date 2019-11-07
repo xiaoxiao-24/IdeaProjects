@@ -18,7 +18,6 @@ from pyspark.ml import Pipeline
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from sklearn.metrics import confusion_matrix
 
-
 conf = SparkConf().setAppName("Sparkimsi").setMaster("local[*]")
 sc = SparkContext()
 
@@ -101,7 +100,6 @@ featureIndexer = VectorIndexer(inputCol="features",
                                maxCategories=4).fit(data)
 featureIndexer.transform(data).show(5, True)
 
-
 ############################################
 #  split dataset into : training and test  #
 ############################################
@@ -110,12 +108,10 @@ featureIndexer.transform(data).show(5, True)
 trainingData.show(5, False)
 testData.show(5, False)
 
-
 ############################
 #  fit the training model  #
 ############################
 logr = LogisticRegression(featuresCol='indexedFeatures', labelCol='indexedLabel')
-
 
 ############################
 #  Pipeline Architecture   #
@@ -125,11 +121,10 @@ labelConverter = IndexToString(inputCol="prediction", outputCol="predictedLabel"
                                labels=labelIndexer.labels)
 
 # Chain indexers and tree in a Pipeline
-pipeline = Pipeline(stages=[labelIndexer, featureIndexer, logr,labelConverter])
+pipeline = Pipeline(stages=[labelIndexer, featureIndexer, logr, labelConverter])
 
 # Train model.  This also runs the indexers.
 model = pipeline.fit(trainingData)
-
 
 ########################
 #   Make predictions   #
@@ -137,7 +132,6 @@ model = pipeline.fit(trainingData)
 predictions = model.transform(testData)
 # Select example rows to display.
 predictions.select("features", "label", "predictedLabel").show(5)
-
 
 ##################
 #   evaluation   #
@@ -171,12 +165,12 @@ plt.ylim((0, 1))
 plt.plot(fpr, tpr)
 # fill the area under ROC
 # method 1: fill_between()
-#fpr_np = np.asarray(fpr)
-#tpr_np = np.asarray(tpr)
-#plt.fill_between(fpr_np, tpr_np, color='gray') # fill_between() ne marche pas
+# fpr_np = np.asarray(fpr)
+# tpr_np = np.asarray(tpr)
+# plt.fill_between(fpr_np, tpr_np, color='gray') # fill_between() ne marche pas
 # method 2: fill()
-#p.fill(fpr, tpr, color='gray', alpha=0.2)  # fill only une partie
-#p.show()
+p.fill(fpr, tpr, color='gray', alpha=0.2)  # fill only une partie
+p.show()
 plt.show()
 
 # Set the model threshold to maximize F-Measure
@@ -198,9 +192,8 @@ y_true = y_true.toPandas()
 y_pred = predictions.select("predictedLabel")
 y_pred = y_pred.toPandas()
 
-
 class_temp = predictions.select("label").groupBy("label") \
-                        .count().sort('count', ascending=False).toPandas()
+    .count().sort('count', ascending=False).toPandas()
 labels = class_temp["label"].values.tolist()
 
 cnf_matrix = confusion_matrix(y_true, y_pred, labels=labels)
