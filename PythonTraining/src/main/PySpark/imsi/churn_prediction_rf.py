@@ -29,7 +29,7 @@ sc.setLogLevel("ERROR")
 ##################################
 #      read from JSON file       #
 ##################################
-path = "/Users/xiaoxiaorey/IdeaProjects/sparktraining/data_source/imsi_json.json"
+path = "/Users/xiaoxiaosu/Documents/Codes/sample-data/imsi_json.json"
 imsiDF = spark.read.json(path)
 
 imsiDF.createOrReplaceTempView("imsiDF")

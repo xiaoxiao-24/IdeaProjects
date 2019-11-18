@@ -23,7 +23,7 @@ object PropertySale_DS {
 
     val spark = SparkSession.builder().appName("PropertySale").config("spark.some.config","somevalue").getOrCreate()
 
-    val path = "data_source/AlleghenyPropertySale.csv"
+    val path = "/Users/xiaoxiaorey/Documents/Codes/sample-data/PropertySale/AlleghenyPropertySale.csv"
 
     val customSchema = StructType(Seq(
       StructField("ParId",StringType,true),

@@ -19,7 +19,7 @@ object imsi_binaryclassification extends App{
 
   val spark = SparkSession.builder().appName("IMSI").getOrCreate()
 
-  val path = "data_source/imsi_json.json"
+  val path = "/Users/xiaoxiaorey/Documents/Codes/sample-data/imsi_json.json"
 
   val imsiDF = spark.read.json(path)
 

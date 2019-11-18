@@ -31,7 +31,7 @@ sc.setLogLevel("ERROR")
 ##################################
 #      read from JSON file       #
 ##################################
-path = "/Users/xiaoxiaorey/IdeaProjects/sparktraining/data_source/imsi_json.json"
+path = "/Users/xiaoxiaosu/Documents/Codes/sample-data/imsi_json.json"
 imsiDF = spark.read.json(path)
 
 imsiDF.createOrReplaceTempView("imsiDF")
@@ -56,7 +56,7 @@ imsi_train = spark.sql("select arpu, averagemonthlybill, totalspent, bool2int(sm
 
 imsi_train.show(5)
 
-"""
+
 ##########################################################
 #      distribution and relationships of variables       #
 ##########################################################
@@ -72,7 +72,7 @@ sample2_df = imsi_train.select(['arpu', 'daysactive']).sample(False, 0.2, 42)
 pandas2_df = sample2_df.toPandas()
 sns.lmplot(x='arpu', y='daysactive', data=pandas2_df)
 plt.show()
-"""
+
 
 #######################################
 #      normalisation of dataset       #
@@ -85,14 +85,17 @@ label_Col = 'bool2int(canceled)'
 data = get_data_ready(imsi_train, cat_cols, num_cols, label_Col)
 data.show(5)
 
-###########################################
-#  encode the feature-columns to vectors  #
-###########################################
+########################################
+#  encode the label-columns to vector  #
+########################################
 # Index labels, adding metadata to the label column
 labelIndexer = StringIndexer(inputCol='label',
                              outputCol='indexedLabel').fit(data)
 labelIndexer.transform(data).show(5, True)
 
+##################################
+#  index feature-vector columns  #
+##################################
 # Automatically identify categorical features, and index them.
 # Set maxCategories so features with > 4 distinct values are treated as continuous.
 featureIndexer = VectorIndexer(inputCol="features",

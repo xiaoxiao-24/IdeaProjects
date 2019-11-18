@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-
+from datetime import date
 
 def f(var):
     return var ** 2
@@ -20,7 +20,11 @@ plt.grid()
 
 plt.title('How to fill an area between a curve and the x axis?', fontsize=10)
 
-# plt.savefig('how_to_fill_area_matplotlib_01.png', bbox_inches='tight')
+today = date.today()
+path_fig = "/Users/xiaoxiaosu/Downloads/"
+nom_fig = "how_to_fill_area_matplotlib_01_" + str(today) + ".png"
+save_to = path_fig + nom_fig
+plt.savefig(save_to, bbox_inches='tight')
 plt.show()
 # plt.close()
 

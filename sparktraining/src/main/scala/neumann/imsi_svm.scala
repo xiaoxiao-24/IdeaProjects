@@ -1,15 +1,7 @@
 package neumann
 
-import neumann.imsi_binaryclassification.rf
-import org.apache.log4j.{Level, Logger}
-import org.apache.spark.ml.feature.{OneHotEncoderEstimator, StringIndexer, VectorAssembler}
-import org.apache.spark.ml.tuning.ParamGridBuilder
-import org.apache.spark.mllib.classification.SVMWithSGD
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.{SparkConf, SparkContext}
 
-
-object imsi_svm extends App{
+/*object imsi_svm extends App{
 
   val conf = new SparkConf().setAppName("SparkIMSI").setMaster("local[*]")
   val sc = new SparkContext(conf)
@@ -93,4 +85,4 @@ object imsi_svm extends App{
     addGrid(rf.numTrees,Array(20,50,100)).
     build()
 
-}
+}*/

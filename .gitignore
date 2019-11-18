@@ -1,0 +1,22 @@
+# ignore all logs
+*.log
+
+# ignore env repository
+**/venv
+**/venv2
+**/target
+**/out
+**/metastore_db
+**/test
+**/.idea
+
+# ignore those repositories
+imsi_churn/
+imsi_churn_rf/
+scalahelloworld/
+sparktraining/src/main/java/
+sparktraining/src/main/resources/
+
+# ignore file
+sparktraining/.DS_Store
+*.iml
