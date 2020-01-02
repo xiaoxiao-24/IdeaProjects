@@ -1,6 +1,9 @@
 # ignore all logs
 *.log
 
+# Mac OS files
+*.DS_Store
+
 # ignore env repository
 **/venv
 **/venv2
@@ -18,5 +21,7 @@ sparktraining/src/main/java/
 sparktraining/src/main/resources/
 
 # ignore file
-sparktraining/.DS_Store
 *.iml
+
+# ignore temporary projects
+BestRoute/
