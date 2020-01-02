@@ -34,12 +34,13 @@ object CreateSpartialRDD {
     // -----------------------------------------------------------
 
     val shapefileInputLocation = "/Users/xiaoxiaosu/Documents/Codes/sample-data/NYC-taxi/MapZone/NYC_TaxiZonesShapeFile"
-    val spatialRDD_Shapefile = ShapefileReader.readToGeometryRDD(sparkSession.sparkContext, shapefileInputLocation)
+    //val spatialRDD_Shapefile = ShapefileReader.readToGeometryRDD(sparkSession.sparkContext, shapefileInputLocation)
+    val spatialRDD_Shapefile = ShapefileReader.readToPolygonRDD(sparkSession.sparkContext, shapefileInputLocation)
     val spatialDfShapefile = Adapter.toDf(spatialRDD_Shapefile, sparkSession)
     println("--- Schema of spatialDf from Shapefile ---")
     spatialDfShapefile.printSchema()
     println("--- Top 5 lines of spatialDfShapefile ---")
-    spatialDfShapefile.show(5)
+    spatialDfShapefile.show(5, false)
 
     // Create a Geometry type column
     spatialDfShapefile.createOrReplaceTempView("rawdf")
@@ -53,7 +54,9 @@ object CreateSpartialRDD {
     spatialDf.printSchema()
     spatialDf.createOrReplaceTempView("spatialdf")
     println("--- Top 5 lines of spatialDf in degree ---")
-    spatialDf.show(5)
+    spatialDf.show(5, false)
+
+    /*
 
     // Transform the Coordinate Reference System
     // from degree-based-CRS to meter-based-CRS: EPSG4326 -> EPSG3857
@@ -124,5 +127,7 @@ object CreateSpartialRDD {
     spatialDf_5knn_point.show(5)
 
 
+     */
+    sparkSession.stop()
   }
 }
